@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beginner to Senior in Full-Stack</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Beginner to Senior in Full-Stack</h1>
+      <p class="tagline">Do zero ao sênior. Uma trilha, sete tecnologias, cinco níveis cada.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- TELA PRINCIPAL (GRID) -->
+    <section id="tracks-container" class="tracks">
+      <h2>Trilhas</h2>
+      <div class="track-grid">
+        <article class="track-card" data-track="java">
+          <span class="track-icon">☕</span>
+          <h3>Java</h3>
+          <p>Do Hello World a microsserviços.</p>
+          <span class="track-levels">5 níveis</span>
+        </article>
+
+        <article class="track-card" data-track="sql">
+          <span class="track-icon">🗄️</span>
+          <h3>SQL</h3>
+          <p>Do SELECT a performance.</p>
+          <span class="track-levels">5 níveis</span>
+        </article>
+
+        <article class="track-card" data-track="spring">
+          <span class="track-icon">🌱</span>
+          <h3>Spring Boot</h3>
+          <p>Do @RestController a segurança avançada.</p>
+          <span class="track-levels">5 níveis</span>
+        </article>
+
+        <article class="track-card" data-track="docker">
+          <span class="track-icon">🐳</span>
+          <h3>Docker</h3>
+          <p>Do docker run a orquestração.</p>
+          <span class="track-levels">5 níveis</span>
+        </article>
+
+        <article class="track-card" data-track="aws">
+          <span class="track-icon">☁️</span>
+          <h3>AWS</h3>
+          <p>Do Free Tier a arquitetura resiliente.</p>
+          <span class="track-levels">5 níveis</span>
+        </article>
+
+        <article class="track-card" data-track="backend">
+          <span class="track-icon">🔧</span>
+          <h3>Back-end Geral</h3>
+          <p>Git, HTTP, Linux, system design.</p>
+          <span class="track-levels">5 níveis</span>
+        </article>
+
+        <article class="track-card" data-track="frontend">
+          <span class="track-icon">🎨</span>
+          <h3>Front-End</h3>
+          <p>HTML + CSS + JS para interface profissional.</p>
+          <span class="track-levels">5 níveis</span>
+        </article>
+      </div>
+
+      <section class="certificate" style="margin-top: 4rem;">
+        <h2>🏆 Certificação</h2>
+        <p>Cada trilha termina com 5 provas. A <strong>Prova 5</strong> é o exame final — só com a cheat sheet ao lado.</p>
+        <p>Passar em todas as 7 trilhas = <strong>Beginner to Senior in Full-Stack — Certified</strong>.</p>
+      </section>
+    </section>
+
+    <!-- TELA DE DETALHES DA TRILHA (ESCONDIDA INICIALMENTE) -->
+    <section id="track-details" class="track-details hidden">
+      <button id="back-btn" class="back-btn">← Voltar para Trilhas</button>
+      
+      <div class="detail-header">
+        <span id="detail-icon" class="detail-icon"></span>
+        <h2 id="detail-title"></h2>
+      </div>
+
+      <div id="levels-container" class="levels-grid">
+        <!-- Os níveis serão injetados aqui pelo JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Em construção — acompanhe os commits.</p>
+    </div>
+  </footer>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+build/
+.gradle/
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs
+*.log
+logs/
+
+# Env
+.env
+.env.local
+*.properties.local
+application-local.properties
+
+# Node (tooling)
+node_modules/
+
+# Build output
+dist/
+out/
