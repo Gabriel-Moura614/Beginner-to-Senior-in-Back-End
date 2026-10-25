@@ -1,4 +1,4 @@
-// --- BANCO DE DADOS COM AULAS, EXERCÍCIOS E CHEAT SHEETS ---
+// --- BANCO DE DADOS COM TODAS AS TRILHAS, AULAS E CHEAT SHEETS ---
 const tracksData = {
   java: {
     title: "Trilha Java",
@@ -7,6 +7,7 @@ const tracksData = {
       { 
         num: 1, 
         title: "Fundamentos", 
+        desc: "Sintaxe, OOP, tipos de dados.",
         unlocked: true,
         exercises: [
           {
@@ -38,15 +39,78 @@ const tracksData = {
           }
         ]
       },
-      { 
-        num: 2, 
-        title: "Aprofundamento", 
-        unlocked: false,
-        exercises: []
-      }
+      { num: 2, title: "Aprofundamento", desc: "Coleções, Concorrência, JVM.", unlocked: false, exercises: [] },
+      { num: 3, title: "Persistência e Back-end", desc: "JDBC, JPA, Spring Boot.", unlocked: false, exercises: [] },
+      { num: 4, title: "Sênior", desc: "Microsserviços, Cloud, Design.", unlocked: false, exercises: [] },
+      { num: 5, title: "Exame de Certificado", desc: "Prova final com cheat sheet.", unlocked: false, exercises: [] }
     ]
   },
-  // ... (O resto das trilhas pode ficar resumido por enquanto)
+  sql: {
+    title: "Trilha SQL",
+    icon: "🗄️",
+    levels: [
+      { num: 1, title: "Fundamentos", desc: "SELECT, WHERE, ORDER BY.", unlocked: true, exercises: [] },
+      { num: 2, title: "Agregações", desc: "JOIN, GROUP BY, Subqueries.", unlocked: false, exercises: [] },
+      { num: 3, title: "Modelagem", desc: "Índices, transações, normalização.", unlocked: false, exercises: [] },
+      { num: 4, title: "Sênior", desc: "Performance, query plans.", unlocked: false, exercises: [] },
+      { num: 5, title: "Exame de Certificado", desc: "Prova final com cheat sheet.", unlocked: false, exercises: [] }
+    ]
+  },
+  spring: {
+    title: "Trilha Spring Boot",
+    icon: "🌱",
+    levels: [
+      { num: 1, title: "Fundamentos", desc: "IoC, DI, estrutura de projeto.", unlocked: true, exercises: [] },
+      { num: 2, title: "Spring MVC", desc: "REST controllers, DTOs.", unlocked: false, exercises: [] },
+      { num: 3, title: "JPA & Security", desc: "Data JPA, transações, Security básico.", unlocked: false, exercises: [] },
+      { num: 4, title: "Sênior", desc: "JWT, OAuth2, Actuator, performance.", unlocked: false, exercises: [] },
+      { num: 5, title: "Exame de Certificado", desc: "App quebrado para consertar.", unlocked: false, exercises: [] }
+    ]
+  },
+  docker: {
+    title: "Trilha Docker",
+    icon: "🐳",
+    levels: [
+      { num: 1, title: "Fundamentos", desc: "Imagens, containers, docker run.", unlocked: true, exercises: [] },
+      { num: 2, title: "Compose", desc: "Volumes, networks, multi-stage build.", unlocked: false, exercises: [] },
+      { num: 3, title: "Otimização", desc: "Healthchecks, boas práticas.", unlocked: false, exercises: [] },
+      { num: 4, title: "Sênior", desc: "Segurança, CI/CD, Kubernetes.", unlocked: false, exercises: [] },
+      { num: 5, title: "Exame de Certificado", desc: "Stack multi-serviço com bugs.", unlocked: false, exercises: [] }
+    ]
+  },
+  aws: {
+    title: "Trilha AWS",
+    icon: "☁️",
+    levels: [
+      { num: 1, title: "Fundamentos", desc: "Regiões, IAM básico, Free Tier.", unlocked: true, exercises: [] },
+      { num: 2, title: "EC2 & RDS", desc: "Security Groups, SSH, deploy básico.", unlocked: false, exercises: [] },
+      { num: 3, title: "S3 & Monitoramento", desc: "Deploy real, CloudWatch.", unlocked: false, exercises: [] },
+      { num: 4, title: "Sênior", desc: "VPC, Load Balancer, Auto Scaling.", unlocked: false, exercises: [] },
+      { num: 5, title: "Exame de Certificado", desc: "Ambiente com falhas para corrigir.", unlocked: false, exercises: [] }
+    ]
+  },
+  backend: {
+    title: "Trilha Back-end Geral",
+    icon: "🔧",
+    levels: [
+      { num: 1, title: "Git & HTTP", desc: "Commit, branch, métodos HTTP.", unlocked: true, exercises: [] },
+      { num: 2, title: "Git Avançado & REST", desc: "Rebase, design de API.", unlocked: false, exercises: [] },
+      { num: 3, title: "Design & Auth", desc: "JWT, OAuth2, 12 Factor App.", unlocked: false, exercises: [] },
+      { num: 4, title: "Sênior", desc: "System design, observabilidade.", unlocked: false, exercises: [] },
+      { num: 5, title: "Exame de Certificado", desc: "Sistema com falhas de design.", unlocked: false, exercises: [] }
+    ]
+  },
+  frontend: {
+    title: "Trilha Front-End",
+    icon: "🎨",
+    levels: [
+      { num: 1, title: "Base", desc: "HTML semântico, CSS básico, JS.", unlocked: true, exercises: [] },
+      { num: 2, title: "Layouts", desc: "Flexbox, Grid, responsividade.", unlocked: false, exercises: [] },
+      { num: 3, title: "Componentes", desc: "Design system, animações, fetch.", unlocked: false, exercises: [] },
+      { num: 4, title: "Refinamento", desc: "Acessibilidade, performance.", unlocked: false, exercises: [] },
+      { num: 5, title: "Exame de Certificado", desc: "Criar interface do zero com mockup.", unlocked: false, exercises: [] }
+    ]
+  }
 };
 
 // Elementos do DOM
@@ -99,17 +163,23 @@ function openTrack(trackId) {
     const card = document.createElement("div");
     card.className = `level-card ${level.unlocked ? '' : 'locked'}`;
     
-    // Mostra quantos exercícios tem no nível
     const exCount = level.exercises ? level.exercises.length : 0;
-    const descText = level.unlocked ? `${exCount} exercícios disponíveis` : level.desc;
+    const descText = level.unlocked ? (exCount > 0 ? `${exCount} exercícios disponíveis` : 'Em breve (em construção)') : level.desc;
 
     card.innerHTML = `
       <div class="level-info"><h4>Nível ${level.num}: ${level.title}</h4><p>${descText}</p></div>
-      <span class="level-status ${level.unlocked ? 'unlocked' : 'locked'}">${level.unlocked ? 'Disponível' : '🔒 Bloqueado'}</span>
+      <span class="level-status ${level.unlocked ? 'unlocked' : 'locked'}">${level.unlocked ? (exCount > 0 ? 'Disponível' : 'Em breve') : '🔒 Bloqueado'}</span>
     `;
+    
+    // Só permite clicar se estiver desbloqueado E tiver exercícios
     if (level.unlocked && exCount > 0) {
-      card.addEventListener("click", () => openExercise(trackId, level.num, 0)); // 0 = começa no primeiro ex
+      card.style.cursor = "pointer";
+      card.addEventListener("click", () => openExercise(trackId, level.num, 0)); 
+    } else if (level.unlocked && exCount === 0) {
+      card.style.cursor = "not-allowed";
+      card.addEventListener("click", () => alert("O conteúdo deste nível ainda está sendo construído!"));
     }
+    
     levelsContainer.appendChild(card);
   });
 
@@ -128,6 +198,7 @@ document.getElementById("back-btn").addEventListener("click", () => {
 
 document.getElementById("back-to-levels").addEventListener("click", () => {
   clearInterval(timerInterval);
+  timerInterval = null;
   exerciseScreen.classList.add("hidden");
   trackDetails.classList.remove("hidden");
 });
@@ -143,7 +214,6 @@ function openExercise(trackId, levelNum, exerciseIndex) {
 
   if (!exercise) return;
 
-  // Atualiza a tela
   trackDetails.classList.add("hidden");
   exerciseScreen.classList.remove("hidden");
   
@@ -153,20 +223,16 @@ function openExercise(trackId, levelNum, exerciseIndex) {
   cheatSheetContent.innerHTML = exercise.cheatSheet;
   currentExpectedOutput = exercise.expectedOutput;
   
-  // Atualiza o Monaco Editor
   if(editorInstance) {
     editorInstance.setValue(exercise.initialCode);
   } else {
-    // Se o Monaco ainda não carregou, espera um pouco
     setTimeout(() => editorInstance.setValue(exercise.initialCode), 500);
   }
   
-  // Reseta terminal e status
   terminalOutput.textContent = "Aguardando execução...";
   validationStatus.textContent = "";
   validationStatus.className = "status-message";
   
-  // Inicia Cronômetro (ou continua, se já estiver rodando)
   if (!timerInterval) {
     timerSeconds = 0;
     updateTimerDisplay();
@@ -200,22 +266,16 @@ runBtn.addEventListener("click", async () => {
 
     const data = await response.json();
     
-    // --- TRATAMENTO DE ERRO DA API (O CONSERTO) ---
     let output = "";
     let isError = false;
 
-    // Se falhou na compilação (ex: erro de sintaxe, falta de ponto e vírgula)
     if (data.compile && data.compile.stderr) {
       output = data.compile.stderr;
       isError = true;
-    } 
-    // Se falhou na execução (ex: divisão por zero)
-    else if (data.run && data.run.stderr) {
+    } else if (data.run && data.run.stderr) {
       output = data.run.stderr;
       isError = true;
-    } 
-    // Se rodou perfeitamente
-    else if (data.run && data.run.output) {
+    } else if (data.run && data.run.output) {
       output = data.run.output;
     } else {
       output = "Ocorreu um erro desconhecido na API.";
@@ -224,19 +284,15 @@ runBtn.addEventListener("click", async () => {
 
     terminalOutput.textContent = output;
 
-    // Validação do exercício
     if (!isError && output.trim() === currentExpectedOutput.trim()) {
       validationStatus.textContent = "✅ Desafio Concluído!";
       validationStatus.classList.add("success");
       
-      // Lógica simples de próxima etapa: avança pro próximo ex, ou desbloqueia próximo nível
       setTimeout(() => {
         const levelData = tracksData[currentTrackId].levels.find(l => l.num === currentLevelNum);
         if (currentExerciseIndex + 1 < levelData.exercises.length) {
-          // Tem próximo exercício neste nível
           openExercise(currentTrackId, currentLevelNum, currentExerciseIndex + 1);
         } else {
-          // Acabaram os exercícios do nível, desbloqueia o próximo
           const nextLevel = tracksData[currentTrackId].levels.find(l => l.num === currentLevelNum + 1);
           if (nextLevel) {
             nextLevel.unlocked = true;
