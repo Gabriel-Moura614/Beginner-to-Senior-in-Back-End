@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beginner to Senior in Full-Stack</title>
   <link rel="stylesheet" href="./css/style.css">
+  <!-- Carregando o Monaco Editor (VS Code no navegador) -->
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.min.css">
 </head>
 <body>
   <header class="site-header">
@@ -25,42 +27,36 @@
           <p>Do Hello World a microsserviços.</p>
           <span class="track-levels">5 níveis</span>
         </article>
-
         <article class="track-card" data-track="sql">
           <span class="track-icon">🗄️</span>
           <h3>SQL</h3>
           <p>Do SELECT a performance.</p>
           <span class="track-levels">5 níveis</span>
         </article>
-
         <article class="track-card" data-track="spring">
           <span class="track-icon">🌱</span>
           <h3>Spring Boot</h3>
           <p>Do @RestController a segurança avançada.</p>
           <span class="track-levels">5 níveis</span>
         </article>
-
         <article class="track-card" data-track="docker">
           <span class="track-icon">🐳</span>
           <h3>Docker</h3>
           <p>Do docker run a orquestração.</p>
           <span class="track-levels">5 níveis</span>
         </article>
-
         <article class="track-card" data-track="aws">
           <span class="track-icon">☁️</span>
           <h3>AWS</h3>
           <p>Do Free Tier a arquitetura resiliente.</p>
           <span class="track-levels">5 níveis</span>
         </article>
-
         <article class="track-card" data-track="backend">
           <span class="track-icon">🔧</span>
           <h3>Back-end Geral</h3>
           <p>Git, HTTP, Linux, system design.</p>
           <span class="track-levels">5 níveis</span>
         </article>
-
         <article class="track-card" data-track="frontend">
           <span class="track-icon">🎨</span>
           <h3>Front-End</h3>
@@ -68,27 +64,47 @@
           <span class="track-levels">5 níveis</span>
         </article>
       </div>
-
-      <section class="certificate" style="margin-top: 4rem;">
-        <h2>🏆 Certificação</h2>
-        <p>Cada trilha termina com 5 provas. A <strong>Prova 5</strong> é o exame final — só com a cheat sheet ao lado.</p>
-        <p>Passar em todas as 7 trilhas = <strong>Beginner to Senior in Full-Stack — Certified</strong>.</p>
-      </section>
     </section>
 
-    <!-- TELA DE DETALHES DA TRILHA (ESCONDIDA INICIALMENTE) -->
+    <!-- TELA DE DETALHES DA TRILHA -->
     <section id="track-details" class="track-details hidden">
       <button id="back-btn" class="back-btn">← Voltar para Trilhas</button>
-      
       <div class="detail-header">
         <span id="detail-icon" class="detail-icon"></span>
         <h2 id="detail-title"></h2>
       </div>
+      <div id="levels-container" class="levels-grid"></div>
+    </section>
 
-      <div id="levels-container" class="levels-grid">
-        <!-- Os níveis serão injetados aqui pelo JavaScript -->
+    <!-- TELA DE EXERCÍCIO (NOVA) -->
+    <section id="exercise-screen" class="exercise-screen hidden">
+      <div class="exercise-header">
+        <button id="back-to-levels" class="back-btn">← Voltar para Níveis</button>
+        <div class="timer-box">
+          ⏱️ Tempo: <span id="timer-display">00:00</span>
+        </div>
+      </div>
+      
+      <div class="exercise-content">
+        <div class="exercise-desc">
+          <h3>Nível 1: Hello World</h3>
+          <p>Complete o código abaixo para imprimir <strong>"Hello, World!"</strong> na tela. Depois clique em "Rodar Código".</p>
+        </div>
+        
+        <div class="editor-container" id="editor"></div>
+        
+        <div class="toolbar">
+          <button id="run-btn" class="run-btn">▶ Rodar Código</button>
+          <span id="validation-status" class="status-message"></span>
+        </div>
+        
+        <div class="terminal-container">
+          <div class="terminal-header">TERMINAL</div>
+          <pre id="terminal-output" class="terminal-body">Aguardando execução...</pre>
+        </div>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
@@ -97,6 +113,8 @@
     </div>
   </footer>
 
+  <!-- Script do Monaco Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
   <script src="./js/script.js"></script>
 </body>
 </html>
